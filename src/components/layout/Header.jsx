@@ -4,10 +4,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import RealEstateAgentIcon from '@mui/icons-material/RealEstateAgent';
 
 const menuItems = [
-  { label: 'Trang chủ', href: 'https://voquoctrieu.github.io/HueHotelUi/' },
-  { label: 'Về chúng tôi', href: 'https://voquoctrieu.github.io/HueHotelUi/' },
-  { label: 'Phòng', href: 'https://voquoctrieu.github.io/HueHotelUi/' },
-  { label: 'Dịch vụ', href: 'https://voquoctrieu.github.io/HueHotelUi/' },
+  { label: 'Trang chủ', href: 'https://voquoctrieu.github.io/HueHotelUI/' },
+  { label: 'Về chúng tôi', href: 'https://voquoctrieu.github.io/HueHotelUI/' },
+  { label: 'Phòng', href: 'https://voquoctrieu.github.io/HueHotelUI/' },
+  { label: 'Dịch vụ', href: 'https://voquoctrieu.github.io/HueHotelUI/' },
 ];
 
 const Header = () => {
@@ -60,7 +60,7 @@ const Header = () => {
       <Button
         variant="outlined"
         component="a"
-        href="https://voquoctrieu.github.io/HueHotelUi/"
+        href="https://voquoctrieu.github.io/HueHotelUI/"
         target="_blank"
         rel="noopener noreferrer"
         sx={{
@@ -95,7 +95,7 @@ const Header = () => {
                 <ListItemText primary={item.label} />
               </ListItem>
             ))}
-            <ListItem button component="a" href="https://voquoctrieu.github.io/HueHotelUi/" target="_blank" rel="noopener noreferrer">
+            <ListItem button component="a" href="https://voquoctrieu.github.io/HueHotelUI/" target="_blank" rel="noopener noreferrer">
               <ListItemText primary="ĐẶT NGAY" />
             </ListItem>
           </List>
