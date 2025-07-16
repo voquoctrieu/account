@@ -10,8 +10,12 @@ import {
   Link,
   Paper,
   Avatar,
+  IconButton,
+  InputAdornment
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link as RouterLink } from 'react-router-dom';
 import Layout from '../layout/Layout';
 
@@ -24,6 +28,9 @@ const SignUp = () => {
     confirmPassword: '',
     agreeToTerms: false,
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
@@ -35,7 +42,8 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    setSuccess(true);
+    
   };
 
   return (
@@ -60,6 +68,11 @@ const SignUp = () => {
           <Typography component='h1' variant='h5' sx={{ mb: 3 }}>
             Đăng ký
           </Typography>
+          {success && (
+            <Typography color='success.main' sx={{ mb: 2, textAlign: 'center' }}>
+              Đăng ký thành công
+            </Typography>
+          )}
           <Box component='form' onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
               margin='normal'
@@ -105,11 +118,25 @@ const SignUp = () => {
               fullWidth
               name='password'
               label='Mật khẩu'
-              type='password'
+              type={showPassword ? 'text' : 'password'}
               id='password'
               autoComplete='new-password'
               value={formData.password}
               onChange={handleChange}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setShowPassword((show) => !show)}
+                      edge="end"
+                      tabIndex={-1}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
             <TextField
               margin='normal'
@@ -117,10 +144,24 @@ const SignUp = () => {
               fullWidth
               name='confirmPassword'
               label='Xác nhận mật khẩu'
-              type='password'
+              type={showConfirmPassword ? 'text' : 'password'}
               id='confirmPassword'
               value={formData.confirmPassword}
               onChange={handleChange}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle confirm password visibility"
+                      onClick={() => setShowConfirmPassword((show) => !show)}
+                      edge="end"
+                      tabIndex={-1}
+                    >
+                      {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
             <FormControlLabel
               control={
