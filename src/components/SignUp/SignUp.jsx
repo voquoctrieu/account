@@ -200,8 +200,8 @@ const SignUp = () => {
             </Button>
             <Box sx={{ textAlign: 'center' }}>
               <Link
-                component={RouterLink}
-                to='/login'
+                component="a"
+                href="https://voquoctrieu.github.io/HueHotelUI/"
                 variant='body2'
                 sx={{
                   color: 'primary.main',

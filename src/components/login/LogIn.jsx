@@ -49,7 +49,7 @@ const Login = () => {
       return;
     }
     setError('');
-    window.location.href = 'https://voquoctrieu.github.io/HueHotelUi/';
+    window.location.href = 'https://voquoctrieu.github.io/HueHotelUI/';
   };
 
   return (
