@@ -52,7 +52,7 @@ const SignUp = () => {
         <Paper
           elevation={3}
           sx={{
-            padding: 4,
+            p: { xs: 2, sm: 4 },
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -60,12 +60,14 @@ const SignUp = () => {
             backdropFilter: 'blur(10px)',
             borderRadius: 2,
             boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+            width: '100%',
+            maxWidth: 400,
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component='h1' variant='h5' sx={{ mb: 3 }}>
+          <Typography component='h1' variant='h5' sx={{ mb: { xs: 2, sm: 3 }, fontSize: { xs: 22, sm: 24 } }}>
             Đăng ký
           </Typography>
           {success && (
@@ -186,10 +188,12 @@ const SignUp = () => {
               fullWidth
               variant='contained'
               sx={{
-                mt: 3,
-                mb: 2,
+                mt: { xs: 2, sm: 3 },
+                mb: { xs: 1.5, sm: 2 },
+                fontSize: { xs: 15, sm: 16 },
                 background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
                 boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
+                minHeight: 40,
               }}
             >
               Đăng ký
