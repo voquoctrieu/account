@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Container,
@@ -31,6 +32,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
@@ -43,7 +45,9 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSuccess(true);
-    
+    setTimeout(() => {
+      navigate('/login');
+    }, 1500);
   };
 
   return (
