@@ -21,7 +21,7 @@ const Footer = () => (
       borderTopLeftRadius: 32,
       borderTopRightRadius: 32,
       mt: 8,
-      position: 'fixed',
+      position: { xs: 'static', md: 'fixed' },
       left: 0,
       bottom: 0,
       zIndex: 2,
