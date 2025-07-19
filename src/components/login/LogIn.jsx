@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { auth } from "../../firebase";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import {
   Box,
   Container,
@@ -29,6 +31,7 @@ const Login = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
@@ -44,12 +47,22 @@ const Login = () => {
       setError('Vui lòng nhập đầy đủ email và mật khẩu.');
       return;
     }
-    if (formData.email !== '22T1020774@husc.edu.vn' || formData.password !== '123456') {
-      setError('Email hoặc mật khẩu không đúng!');
-      return;
-    }
-    setError('');
-    window.location.href = 'https://voquoctrieu.github.io/HueHotelUI/';
+    signInWithEmailAndPassword(auth, formData.email, formData.password)
+      .then((userCredential) => {
+        setError('');
+        setIsLoggedIn(true);
+        window.location.href = 'https://voquoctrieu.github.io/HueHotelUI/';
+      })
+      .catch((error) => {
+        setError('Email hoặc mật khẩu không đúng!');
+      });
+  };
+
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      setIsLoggedIn(false);
+      window.location.href = '/login';
+    });
   };
 
   return (

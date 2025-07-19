@@ -19,6 +19,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link as RouterLink } from 'react-router-dom';
 import Layout from '../layout/Layout';
+import { auth } from "../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -44,10 +46,24 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSuccess(true);
-    setTimeout(() => {
-      navigate('/login');
-    }, 1500);
+    if (!formData.email || !formData.password || !formData.confirmPassword) {
+      setSuccess(false);
+      return;
+    }
+    if (formData.password !== formData.confirmPassword) {
+      setSuccess(false);
+      return;
+    }
+    createUserWithEmailAndPassword(auth, formData.email, formData.password)
+      .then((userCredential) => {
+        setSuccess(true);
+        setTimeout(() => {
+          navigate('/login');
+        }, 1500);
+      })
+      .catch((error) => {
+        setSuccess(false);
+      });
   };
 
   return (
@@ -76,7 +92,7 @@ const SignUp = () => {
           </Typography>
           {success && (
             <Typography color='success.main' sx={{ mb: 2, textAlign: 'center' }}>
-              Đăng ký thành công
+              Đăng ký thành công. Bạn sẽ được chuyển về trang đăng nhập.
             </Typography>
           )}
           <Box component='form' onSubmit={handleSubmit} sx={{ mt: 1 }}>
