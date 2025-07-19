@@ -49,9 +49,9 @@ const Login = () => {
     }
     signInWithEmailAndPassword(auth, formData.email, formData.password)
       .then((userCredential) => {
-        setError('');
+    setError('');
         setIsLoggedIn(true);
-        window.location.href = 'https://voquoctrieu.github.io/HueHotelUI/';
+    window.location.href = 'https://voquoctrieu.github.io/HueHotelUI/';
       })
       .catch((error) => {
         setError('Email hoặc mật khẩu không đúng!');

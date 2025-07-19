@@ -22,6 +22,10 @@ import Layout from '../layout/Layout';
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
+function isStrongPassword(password) {
+  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
+}
+
 const SignUp = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -34,6 +38,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -46,23 +51,31 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setPasswordError("");
     if (!formData.email || !formData.password || !formData.confirmPassword) {
       setSuccess(false);
       return;
     }
     if (formData.password !== formData.confirmPassword) {
       setSuccess(false);
+      setPasswordError("Mật khẩu xác nhận không khớp.");
+      return;
+    }
+    if (!isStrongPassword(formData.password)) {
+      setSuccess(false);
+      setPasswordError("Mật khẩu phải ít nhất 8 ký tự, có chữ hoa, chữ thường, số và ký tự đặc biệt.");
       return;
     }
     createUserWithEmailAndPassword(auth, formData.email, formData.password)
       .then((userCredential) => {
-        setSuccess(true);
-        setTimeout(() => {
-          navigate('/login');
-        }, 1500);
+    setSuccess(true);
+    setTimeout(() => {
+      navigate('/login');
+    }, 1500);
       })
       .catch((error) => {
         setSuccess(false);
+        setPasswordError("Đăng ký thất bại: " + error.message);
       });
   };
 
@@ -160,6 +173,11 @@ const SignUp = () => {
                 ),
               }}
             />
+            {passwordError && (
+              <Typography color="error" sx={{ fontSize: 14, mb: 1 }}>
+                {passwordError}
+              </Typography>
+            )}
             <TextField
               margin='normal'
               required
